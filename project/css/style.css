@@ -1,0 +1,633 @@
+/*设计令牌*/
+/*定义颜色，字体，基础间距*/
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #7b68ee;
+  --accent-color: #ff6b9d;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-light: #718096;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-dark: #2d3748;
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/*全局*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #d299c2 100%);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #4a90e2, #7b68ee, #ff6b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  color: var(--text-primary);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #4a90e2, #ff6b9d);
+  border-radius: 2px;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+/*布局系统*/
+/*容器宽度，栅格/弹性布局规范*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+section:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 20px 0;
+}
+
+/* Hero区域特殊样式 */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(168, 237, 234, 0.3), rgba(254, 214, 227, 0.3), rgba(210, 153, 194, 0.3));
+    position: relative;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    animation: float 20s ease-in-out infinite;
+}
+
+#hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+#hero h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #2d3748, #4a90e2, #7b68ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#hero p {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.Skill-container{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.Project-container{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* About区卡片布局 */
+.about-cards-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.about-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.about-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.about-card:hover::before {
+    transform: scaleX(1);
+}
+
+.about-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    text-align: center;
+    position: relative;
+}
+
+.about-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: 1px;
+}
+
+.about-card p {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.about-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.about-card li {
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 25px;
+}
+
+.about-card li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.about-card ul ul {
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
+.about-card ul ul li::before {
+    content: '•';
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+
+/*组件样式*/
+/*导航栏，按钮，技能卡片，项目卡片样式*/
+
+/*按钮*/
+button {
+    background: linear-gradient(135deg, #4a90e2, #7b68ee, #ff6b9d);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+nav {
+    /*位置*/
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    padding: 1rem 2rem;
+    z-index: 1000;
+
+    /*关于样式颜色*/
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    /*关于对齐*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+nav h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    background: linear-gradient(135deg, #2d3748, #4a5568);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+}
+
+nav ul li a {
+    color: var(--text-primary);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/*要加的后来导航栏样式，nav代表导航栏，scrolled表示变的样式名*/
+nav.scrolled{
+    box-shadow:0 2px 8px rgba(0,0,0,0.5);
+}
+
+.skill-card, .project-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card::before, .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover, .project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-heavy);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.skill-card:hover::before, .project-card:hover::before {
+    transform: scaleX(1);
+}
+
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow-heavy);
+    margin: 0 auto 30px auto;
+    display: block;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+  
+  .picture {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 0 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    flex: 0 0 auto;
+  }
+
+  .picture:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Contact区域布局 */
+  .contact-items {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contact-item .picture {
+    margin: 0;
+  }
+
+  .contact-item p {
+    margin: 0;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .picture img {
+    width: 80px;              /* 图片宽度 */
+    height: 80px;             /* 图片高度 */
+    object-fit: cover;        /* 保持比例裁剪 */
+    border-radius: 8px;       /* 圆角 */
+    transition: transform 0.3s ease; /* 悬停动效 */
+  }
+
+  .picture:hover img {
+    transform: scale(1.1);    /* 悬停时放大 */
+  }
+
+
+/*动效区*/
+/*页面淡入，滚动显示，hover动效*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 添加浮动动画 */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.avatar {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 添加脉冲动画 */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+button {
+    animation: pulse 2s infinite;
+}
+
+/*响应式断点*/
+/*手机端，平板端，桌面端调整*/
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    nav {
+        padding: 0.8rem 1rem;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        padding: 1rem;
+        border-radius: 0 0 20px 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    nav ul.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .Skill-container, .Project-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .about-cards-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .about-card {
+        min-width: auto;
+        max-width: none;
+        padding: 25px;
+    }
+    
+    .skill-card, .project-card {
+        padding: 20px;
+    }
+    
+    .avatar {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .contact-items {
+        gap: 20px;
+    }
+    
+    .picture {
+        margin: 0 5px;
+        padding: 1rem;
+    }
+    
+    .picture img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h2 {
+        font-size: 1.9rem;
+    }
+    
+    .Skill-container, .Project-container {
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .about-cards-container {
+        gap: 25px;
+    }
+    
+    .about-card {
+        min-width: 280px;
+    }
+    
+    section {
+        padding: 80px 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    section {
+        padding: 120px 0;
+    }
+}
