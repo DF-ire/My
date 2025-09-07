@@ -367,40 +367,7 @@ nav.scrolled{
     box-shadow:0 2px 8px rgba(0,0,0,0.5);
 }
 
-.skill-card, .project-card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    color: var(--text-primary);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: var(--shadow-medium);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.skill-card::before, .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.skill-card:hover, .project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-heavy);
-    background: rgba(255, 255, 255, 0.9);
-}
-
-.skill-card:hover::before, .project-card:hover::before {
-    transform: scaleX(1);
-}
+/* 移除未使用的 .skill-card 和 .project-card 样式 */
 
 
 .avatar {
@@ -536,15 +503,9 @@ button {
         backdrop-filter: blur(20px);
         padding: 1rem;
         border-radius: 0 0 20px 20px;
-        transform: translateY(-100%);
-        opacity: 0;
-        transition: all 0.3s ease;
+        /* 移除未使用的下拉菜单展开动画样式 */
     }
     
-    nav ul.active {
-        transform: translateY(0);
-        opacity: 1;
-    }
     
     h1 {
         font-size: 2rem;
