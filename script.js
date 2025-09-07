@@ -3,7 +3,7 @@ const nav=document.querySelector('nav');      //变量nav存导航栏
 window.addEventListener(
     'scroll',()=>{                      //页面滚动，执行以下代码
         if(window.scrollY>50){
-            nav.classList.add('scroll');
+            nav.classList.add('scrolled');
         }else{
             nav.classList.remove('scrolled');
         }
@@ -22,3 +22,14 @@ const observer=new IntersectionObserver(entries=>{
 faders.forEach(fader=>{
     observer.observe(fader);
 });
+
+// Smooth scroll for "Learn More" button to #About
+const learnMoreBtn=document.querySelector('#hero button');
+if(learnMoreBtn){
+    learnMoreBtn.addEventListener('click',()=>{
+        const about=document.querySelector('#About');
+        if(about){
+            about.scrollIntoView({behavior:'smooth'});
+        }
+    });
+}
